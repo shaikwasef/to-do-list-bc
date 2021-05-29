@@ -1,0 +1,15 @@
+thead{
+    border: 1px solid black;
+}
+.MuiTableCell-root{
+    border-bottom: none;
+}
+
+td{
+    white-space: nowrap;
+}
+
+.completed-tasks{
+    width:100%;
+    height: min-content;
+}

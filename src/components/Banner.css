@@ -1,0 +1,17 @@
+.banner{
+    background: #fa0f61;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    white-space: nowrap;
+    border-bottom-right-radius: 40px 40px;
+    border-bottom-left-radius: 40px 40px;
+    color:white;
+    width: 100%;
+}
+
+.eth-symbol{
+    height:90px;
+    width: 90px;
+}

@@ -1,0 +1,15 @@
+.tasks-container{
+    width : 90%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap : 20px;
+    justify-items: center;
+    margin-bottom:20px;
+}
+
+@media screen and (min-width: 700px) {
+    .tasks-container{
+        grid-template-columns : 1fr;
+    }
+  }
+  

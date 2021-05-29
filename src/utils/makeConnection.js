@@ -6,7 +6,7 @@
           var account = result[0];
           var web3 = new Web3(window.ethereum);
       } else{
-          alert('Please install metamask to continue');g
+          alert('Please install metamask to continue');
       }
     return makeResultObj(web3,account);
     }

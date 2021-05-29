@@ -1,34 +1,41 @@
 import React, { useEffect } from 'react';
 import { applicationABI, applicationAddress } from './utils/config';
-import fetchTodoItems from './utils/fetchTodoItems';
-import TodoAddBar from "./components/TodoAddBar"
+import fetchIncompleteTodoItems from './utils/fetchInCompleteTodoItems';
 import makeConnection from './utils/makeConnection';
+import Banner from "./components/Banner"
+import Todo from "./components/TodoComponents/Todo"
+import fetchCompletedTodoItems from './utils/fetchCompletedTasks'
 import './App.css';
+import { useDispatch } from 'react-redux';
+import { addTask } from './actions/addTask';
+import { addAccount, addMethod } from './actions/addConnxParams';
+import { addCompletedTask } from './actions/addCompletedTask';
 
 function App() {
 
-  
+  const dispatch = useDispatch();
+
   useEffect(() => {
       async function initialSetup(){
       const {web3,account} = await  makeConnection();
       const abi = applicationABI;
       const address = applicationAddress;
-      let {methods} = new web3.eth.Contract(abi,address);
-      const todoItems = await fetchTodoItems(methods);
-      const balance = await web3.eth.getBalance(account);
-      //balance
-      const wei =  1000000000000000000;
-      console.log((balance/wei).toFixed(4));
-      //todo items
-      console.log(todoItems);
+      const {methods} = new web3.eth.Contract(abi,address);
+      const todoItems = await fetchIncompleteTodoItems(methods);
+      const completedTodoItems = await fetchCompletedTodoItems(methods);
+      dispatch(addCompletedTask(completedTodoItems));
+      dispatch(addTask(todoItems));
+      dispatch(addAccount(account));
+      dispatch(addMethod(methods));
     }
     initialSetup();
-    },[]);
+    },[dispatch]);
 
 
   return (
-    <div>
-      <TodoAddBar/>
+    <div className="app">
+      <Banner/>
+      <Todo/>
     </div>
   );
 }
